@@ -30,9 +30,10 @@ import gate.util.InvalidOffsetException;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("serial")
 @CreoleResource(name = "Schema Enforcer", interfaceName = "gate.ProcessingResource", icon = "enforce.png", comment = "Produces an annotation set whose content is restricted by the specified set of schemas", helpURL="http://gate.ac.uk/userguide/sec:misc-creole:schemaenforcer")
 public class SchemaEnforcer extends AbstractLanguageAnalyser {
+
+  private static final long serialVersionUID = 3669462353917603566L;
 
   private String inputASName = null;
 

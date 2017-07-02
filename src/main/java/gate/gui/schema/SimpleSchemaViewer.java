@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedMap;
@@ -57,17 +58,11 @@ public class SimpleSchemaViewer extends AbstractVisualResource implements
   public Resource init() {
 
     setLayout(new BorderLayout());
-    textArea = new JTextPane() {
-
-      private static final long serialVersionUID = 3279170264365877569L;
-
-      {
-        this.setEditorKitForContentType("text/xml", new XmlEditorKit());
-        this.setContentType("text/xml");
-        this.setEditable(false);
-      }
-    };
-
+    textArea = new JTextPane();
+    textArea.setEditorKitForContentType("text/xml", new XmlEditorKit());
+    textArea.setContentType("text/xml");
+    textArea.setEditable(false);
+    
     JScrollPane textScroll =
             new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                     JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -91,7 +86,7 @@ public class SimpleSchemaViewer extends AbstractVisualResource implements
 
   // http://boplicity.nl/confluence/display/Java/Xml+syntax+highlighting+in+Swing+JTextPane
 
-  class XmlEditorKit extends StyledEditorKit {
+  private static class XmlEditorKit extends StyledEditorKit {
 
     private static final long serialVersionUID = -2806452598445890716L;
 
@@ -112,9 +107,11 @@ public class SimpleSchemaViewer extends AbstractVisualResource implements
     }
   }
 
-  class XmlViewFactory extends Object implements ViewFactory {
+  private static class XmlViewFactory implements ViewFactory, Serializable {
 
-    /**
+	private static final long serialVersionUID = 5579997296606606896L;
+
+	/**
      * @see javax.swing.text.ViewFactory#create(javax.swing.text.Element)
      */
     public View create(Element element) {
@@ -156,7 +153,7 @@ public class SimpleSchemaViewer extends AbstractVisualResource implements
     patternColors.put(Pattern.compile(TAG_COMMENT), new Color(63, 95, 191));
   }
 
-  class XmlView extends PlainView {
+  private static class XmlView extends PlainView {
 
     public XmlView(Element element) {
       super(element);
