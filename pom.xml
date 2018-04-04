@@ -16,6 +16,9 @@
 	<groupId>uk.ac.gate.plugins</groupId>
 	<artifactId>schema-tools</artifactId>
 	<version>8.5-SNAPSHOT</version>
+	
+	<name>Schema Tools</name>
+	<description>A set of tools for using XML schemas in GATE</description>
 
 	<licenses>
 		<license>
